@@ -36,31 +36,31 @@ jobs:
       - name: Log in to Docker Hub (First Repo)
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME_1 }}
-          password: ${{ secrets.DOCKER_PASSWORD_1 }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Tag and Push API Dev Image to First Repo
         run: |
-          docker tag myapp-api-dev ${{ secrets.DOCKER_USERNAME_1 }}/sdv-api-dev:latest
-          docker push ${{ secrets.DOCKER_USERNAME_1 }}/sdv-api-dev:latest
+          docker tag myapp-api-dev ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
 
       - name: Tag and Push Web Dev Image to First Repo
         run: |
-          docker tag myapp-web-dev ${{ secrets.DOCKER_USERNAME_1 }}/sdv-web-dev:latest
-          docker push ${{ secrets.DOCKER_USERNAME_1 }}/sdv-web-dev:latest
+          docker tag myapp-web-dev ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
 
       - name: Log in to Docker Hub (Second Repo)
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME_2 }}
-          password: ${{ secrets.DOCKER_PASSWORD_2 }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Tag and Push API Dev Image to Second Repo
         run: |
-          docker tag myapp-api-dev ${{ secrets.DOCKER_USERNAME_2 }}/sdv-api-dev:latest
-          docker push ${{ secrets.DOCKER_USERNAME_2 }}/sdv-api-dev:latest
+          docker tag myapp-api-dev ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
 
       - name: Tag and Push Web Dev Image to Second Repo
         run: |
-          docker tag myapp-web-dev ${{ secrets.DOCKER_USERNAME_2 }}/sdv-web-dev:latest
-          docker push ${{ secrets.DOCKER_USERNAME_2 }}/sdv-web-dev:latest
+          docker tag myapp-web-dev ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
