@@ -64,7 +64,7 @@ Cette étape récupère le code source du dépôt pour que les fichiers soient d
 
 #### Connexion Docker HUB
 ```yaml
-- name: Log in to Docker Hub (First Repo)
+- name: Log in to Docker Hub 
   uses: docker/login-action@v2
   with:
     username: ${{ secrets.DOCKER_USERNAME }}
@@ -83,11 +83,11 @@ Construction des images en utilisant les Dockerfiles
 
 #### Push sur Docker Hub
 ```yaml
-- name: Tag and Push API Dev Image to First Repo
+- name: Tag and Push API Dev Image 
   run: |
     docker tag myapp-api-dev:latest ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
-    docker push ${{ secrets.DOCKER_USERNAME_1 }}/sdv-api-dev:latest
-- name: Tag and Push Web Dev Image to First Repo
+    docker push ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
+- name: Tag and Push Web Dev Image 
   run: |
     docker tag myapp-web-dev:latest ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
     docker push ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
