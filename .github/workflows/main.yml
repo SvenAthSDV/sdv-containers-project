@@ -1,5 +1,6 @@
 name: CI/CD Pipeline
 
+# Déclencheurs du workflow
 on:
   push:
     branches:
@@ -17,22 +18,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Build API Dev Image
-        run: docker build -f sdv-api/Dockerfile --target dev -t ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest ./sdv-api
+        run: docker build -f sdv-api/Dockerfile --target dev -t myapp-dev ./sdv-api
 
       - name: Build Web Dev Image
-        run: docker build -f sdv-web/Dockerfile --target dev -t ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest ./sdv-web
+        run: docker build -f sdv-web/Dockerfile --target dev -t myapp-web-dev ./sdv-web
 
   push-dev:
     name: Push Dev Image
     runs-on: ubuntu-latest
-    needs: build-dev 
+    needs: build-dev  # Exécute cette phase seulement si le job 'build-dev' réussit
 
     steps:
       - name: Checkout code
@@ -44,8 +39,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Tag API Dev Image
+        run: docker tag myapp-dev ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
+
       - name: Push API Dev Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/sdv-api-dev:latest
+
+      - name: Tag Web Dev Image
+        run: docker tag myapp-web-dev ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
 
       - name: Push Web Dev Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/sdv-web-dev:latest
