@@ -1,26 +1,24 @@
-version: '3.8'
-
 services:
   api:
     build:
       context: ./sdv-api
       dockerfile: Dockerfile
-      target: ${TARGET:-dev} # Utilise la variable d'environnement TARGET pour définir la cible (dev ou prod)
+      target: dev
     ports:
       - "80:80"
     volumes:
       - ./sdv-api:/app
-    command: ${COMMAND:-["cargo", "run", "--release"]}
+    command: ["cargo", "run", "--release"]
 
   web:
     build:
       context: ./sdv-web
       dockerfile: Dockerfile
-      target: ${TARGET:-dev} # Utilise la variable d'environnement TARGET pour définir la cible (dev ou prod)
+      target: dev
     ports:
       - "3000:3000"
     volumes:
       - ./sdv-web:/usr/src/app
     environment:
       - API_URL=http://api
-    command: ${COMMAND:-["npm", "run", "dev"]}
+    command: ["npm", "run", "dev"]
