@@ -1,18 +1,31 @@
-name: Test Secrets
+name: CI/CD Pipeline
 
-on: 
+# Déclencheurs du workflow
+on:
   push:
-    branches: [main]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  test-secrets:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Show Docker Username
-        run: echo "Docker Username is set to: ${{ secrets.DOCKER_USERNAME }}"
 
-      - name: Check Docker Password Masking
-        run: echo "Docker Password is set to: ${{ secrets.DOCKER_PASSWORD }}"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build API Image
+        run: sudo docker build -f sdv-api/Dockerfile --target dev -t myapp-dev ./sdv-api
+
 
 
 
