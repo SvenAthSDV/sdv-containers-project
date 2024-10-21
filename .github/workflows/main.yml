@@ -10,7 +10,9 @@ jobs:
     steps:
       - name: Show Docker Username
         run: echo "Docker Username is set to: ${{ secrets.DOCKER_USERNAME }}"
+
       - name: Check Docker Password Masking
         run: echo "Docker Password is set to: ${{ secrets.DOCKER_PASSWORD }}"
+
 
 
