@@ -14,6 +14,6 @@ RUN cargo build --release
 
 # Étape de production
 FROM debian:buster-slim AS prod
-COPY --from=builder /app/target/release/your-api-binary /usr/local/bin/your-api-binary
+COPY --from=builder /app/target/release/sdv-api /usr/local/bin/sdv-api
 EXPOSE 80
-CMD ["your-api-binary"]
+CMD ["sdv-api"]
