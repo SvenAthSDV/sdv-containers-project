@@ -27,7 +27,10 @@ Pour exécuter l'API dans un environnement Docker pour le développement :
 
 #### Afficher les pages web
 
-ce rendre sur http://localhost:3000 et http://localhost:80
+ce rendre sur :
+- http://localhost:80
 
 ![screenshot](01.png)
+
+- http://localhost:3000
 ![screenshot](02.png)
